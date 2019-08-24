@@ -1,0 +1,20 @@
+1、找到github网址，申请一个git仓库。
+    如：git@github.com:peterLi1990/peter.git
+2、新建一个本地库
+    git init
+3、在本地库里添加文件
+    git add + 文件名
+4、从暂存区放到仓库
+    git commit -m + 文件名
+5、把仓库文件推送到远端
+    5.1 添加远程仓库
+    git remote add origin it@github.com:peterLi1990/peter.git
+    注释：这里是给远端仓库起个名字，叫做：origin（可以起任意名）
+    git remote ：查看远程仓库
+    git remote -v ：查看远程仓库的详细信息
+6、同步本地仓库到远端仓库
+    git push -u + 库名 + 分支名
+    git push origin
+    上面命令表示，将当前分支推送到origin主机的对应分支。
+    如果当前分支只有一个追踪分支，那么主机名都可以省略。
+    
