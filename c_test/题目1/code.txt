@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct Node {
+        int beiChuShu;
+        int shang;
+        struct Node *next;
+};
+
+
+int main()
+{
+        int beiChuShu;
+        int chuShu;
+        printf("input chushu\n");
+        scanf("%d", &chuShu);
+        printf("chuShu: %d\n", chuShu);
+
+        struct Node *head = NULL;
+        head = (struct Node *)malloc(sizeof(struct Node));
+        memset(head, 0, sizeof(struct Node));
+        if (head == NULL) {
+                return -1;
+        }
+
+        beiChuShu = 1;
+        struct Node *q = NULL;
+        q = head;
+        struct Node *p = NULL;
+        while(beiChuShu) {
+                p = head;
+                while((p != NULL) && (p->beiChuShu != beiChuShu)) {
+                        p = p->next;
+                }
+
+                if (p != NULL) {
+                        break;
+                }
+
+                q->next = (struct Node *)malloc(sizeof(struct Node));
+                if (q->next == NULL) {
+                        return -1;
+                }
+                q = q->next;
+                q->next = NULL;
+                q->shang = beiChuShu*10/chuShu;
+                q->beiChuShu = beiChuShu;
+                beiChuShu = beiChuShu*10%chuShu;
+        }
+
+
+        printf("0.");
+        p = head->next;
+        while (p != NULL) {
+                printf("%d",p->shang);
+                p = p->next;
+        }
+
+        printf("\n");
+        return 0;
+}
+
