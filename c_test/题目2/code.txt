@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+const int LENGTH = 110*10000;
+int main()
+{
+        unsigned int amountTree;
+        unsigned int zone;
+        scanf("%d %d", &amountTree, &zone);
+        int *data = NULL;
+        if (zone == 0) {
+                return -1;
+        }
+        data = (int *)malloc(zone*2*sizeof(int));
+        int i = 0;
+        for (; i< zone*2; i++) {
+                scanf("%d", &data[i]);
+        }
+
+        int tmp[LENGTH];
+        memset(tmp, 1, sizeof(tmp));
+
+        int index = 0;
+        int j = 0;
+        for (i = 0; i< zone; i++) {
+                for (j = data[2*i]; j <= data[2*i+1]; j++) {
+                        tmp[index++] = j;
+                }
+        }
+        int moveTree  = 0;
+        for (i = 0; i <= amountTree; i++) {
+                for (j = 0; j < LENGTH; j++ ) {
+                        if (i == tmp[j]) {
+                                moveTree++;
+                                break;
+                        }
+                }
+        }
+
+        free(data);
+        printf("%d\n", amountTree-moveTree+1);
+
+        return 0;
+}
