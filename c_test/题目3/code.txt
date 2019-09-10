@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+struct Data {
+    int price;
+    int value;
+};
+
+int main()
+{
+    int money;
+    int amount;
+    scanf("%d %d", &money, &amount);
+    struct Data *pData;
+    pData = (struct Data *)malloc(sizeof(struct Data)*amount);
+    if (pData == NULL) {
+        return -1;
+    }
+    memset(pData, 0, sizeof(struct Data)*amount);
+    
+    int i = 0;
+    for (; i < amount; i++) {
+        scanf("%d %d", &pData[i].price, &pData[i].value);
+    }
+    
+    
+    
+    int **result;
+    result = (int **)malloc(sizeof(int*)*amount);
+    if (result == NULL) {
+        return -1;
+    }
+    
+    for (i = 0; i < amount; i++) {
+         result[i] = (int *)malloc(sizeof(int)*(money+1));
+         if (result[i] == NULL) {
+            return -1;
+         }
+         memset(result[i], 0, sizeof(int)*(money+1));
+    }
+    
+    for (i = 0; i <= money; i++) {
+        if (i >= pData[0].price) {
+            result[0][i] = pData[0].price * pData[0].value;
+        }
+    }
+    
+    int j = 1;
+    for (; j < amount; j++) {
+        for (i = 0; i <= money; i++) {
+             if (i >= pData[j].price) {
+                result[j][i] = result[j-1][i] >= (result[j-1][i-pData[j].price] + pData[j].price*pData[j].value ) ? result[j-1][i] : result[j-1][i-pData[j].price] +pData[j].price*pData[j].value;
+                continue;
+             }
+             result[j][i] = result[j-1][i];
+        }
+    }
+    
+
+    printf("%d", result[amount-1][money]);
+
+    
+
+}
