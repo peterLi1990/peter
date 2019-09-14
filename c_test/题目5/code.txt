@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+int main()
+{
+
+        int aveValue;
+        int amount;
+
+        scanf("%d %d", &aveValue, &amount);
+        int *pTmp =  (int *)malloc(sizeof(int)*amount);
+        if (pTmp == NULL) {
+                return -1;
+        }
+        memset(pTmp, 0, sizeof(int)*amount);
+
+        int i = 0;
+        for (; i < amount; i++) {
+                scanf("%d", &pTmp[i]);
+        }
+
+        int j;
+        int tmp;
+        for (i = 0; i < amount - 1; i++) {
+                for(j = 0; j < amount - 1 - i; j++) {
+                        if (pTmp[j] > pTmp[j+1]) {
+                                tmp = pTmp[j];
+                                pTmp[j] = pTmp[j+1];
+                                pTmp[j+1] = tmp;
+                        }
+                }
+        }
+        int total = 0;
+        for (i = 0, j = amount - 1; i < j; ) {
+                if (pTmp[i] +pTmp[j] > aveValue) {
+                        j--;
+                        total++;
+                        continue;
+                }
+                i++;
+                j--;
+                total++;
+        }
+        if (i == j) {
+                total++;
+        }
+        printf("%d\n", total);
+}
