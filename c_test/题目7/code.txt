@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+int GetAmount(int n)
+{
+        if (n == 0) {
+            return -1;
+        }
+
+        int data[55] = {0};
+        data[1] = 1;
+        data[2] = 2;
+        data[3] = 3;
+        data[4] = 4;
+        int i;
+        for (i = 5 ; i < 55; i++) {
+            data[i] =  data[i-1] + data[i-3];
+        }
+        return data[n];
+}
+
+int main()
+{
+        int n;
+        int index = 0;
+        int data[100] = {0};
+        do{
+
+            scanf("%d", &n);
+            if (n == 0) {
+                break;
+            }
+            data[index++] = n;
+        }while(1);
+
+        int total;
+        int i;
+        for (i = 0; i < index; i++) {
+            n = data[i];
+            total = GetAmount(n);
+            printf("%d\n", total);
+        }
+
+
+        return 0;
+}
