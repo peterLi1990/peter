@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<stdlib.h>
+int Get3thPower(int n);
+int main()
+{
+    int i;
+    int j;
+    int k;
+    int value1;
+    int value2;
+    for (i = 1; i <= 9; i++) {
+        for (j = 0; j <= 9; j++) {
+            for (k = 0; k <= 9; k++) {
+                value1 = i * 100 + j*10 + k;
+                value2 = Get3thPower(i) + Get3thPower(j) + Get3thPower(k);
+                if (value1 == value2) {
+                    printf("%d \n", value1);
+                }
+            }
+        }
+    }
+}
+int Get3thPower(int n)
+{
+    return n * n * n;
+}
